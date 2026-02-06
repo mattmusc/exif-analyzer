@@ -1,5 +1,8 @@
 # exif-analyzer
 
+[![CI](https://github.com/mattmusc/exif-analyzer/actions/workflows/ci.yml/badge.svg)](https://github.com/mattmusc/exif-analyzer/actions/workflows/ci.yml)
+
+
 `exif-analyzer` is a CLI tool and Python library to analyze large photo archives
 by extracting useful statistics from EXIF metadata
 (focal lengths, cameras, ISO, apertures, shutter speeds, etc.).
