@@ -1,5 +1,5 @@
 from exiftool import ExifToolHelper
-from time import time, sleep
+from time import time
 import os
 from dataclasses import dataclass
 from concurrent.futures import ProcessPoolExecutor, as_completed
