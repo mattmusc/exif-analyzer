@@ -33,28 +33,23 @@ analyze-json path=".":
 # ─────────────────────
 
 fmt:
-    {{ pip }} install black
-    black exif_analyzer
+    {{ python }} -m black exif_analyzer
 
 lint:
-    {{ pip }} install ruff
-    ruff check exif_analyzer
-
-tools:
-    {{ pip }} install black ruff
+    {{ python }} -m ruff check exif_analyzer
 
 # ─────────────────────
 # Test
 # ─────────────────────
 
 test:
-    .venv/bin/pytest
+    {{ python }} -m pytest
 
 cov:
-    .venv/bin/pytest --cov --cov-report=term-missing
+    {{ python }} -m pytest --cov=exif_analyzer --cov-report=term-missing
 
 cov-html:
-    .venv/bin/pytest --cov --cov-report=html
+    {{ python }} -m pytest --cov=exif_analyzer --cov-report=html
     @echo "Open htmlcov/index.html"
 
 # ─────────────────────
@@ -62,7 +57,13 @@ cov-html:
 # ─────────────────────
 
 clean:
-    rm -rf .venv
-    rm -rf **/__pycache__
-    rm -rf *.egg-info
-    rm -rf htmlcov
+    /usr/bin/env python3 scripts/clean.py
+
+deep-clean:
+    /usr/bin/env python3 scripts/clean.py --venv
+
+# ─────────────────────
+# CI
+# ─────────────────────
+
+ci: lint cov

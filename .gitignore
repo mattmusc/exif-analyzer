@@ -34,3 +34,7 @@ coverage.xml
 coverage.*.xml
 htmlcov/
 htmlcov.*
+
+# Mac OS
+.DS_Store
+.AppleDouble
