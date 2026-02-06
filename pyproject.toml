@@ -16,5 +16,28 @@ dependencies = [
   "pyexiftool"
 ]
 
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+]
+
 [project.scripts]
 exif-analyzer = "exif_analyzer.runner:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.coverage.run]
+branch = true
+source = ["exif_analyzer"]
+omit = [
+  "exif_analyzer/main.py",
+  "exif_analyzer/__main__.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 85

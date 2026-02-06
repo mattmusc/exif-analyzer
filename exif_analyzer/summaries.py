@@ -27,6 +27,8 @@ FOCAL_BUCKETS = (
 
 def bucket_focal(focal: float) -> int:
     """Buckets a focal length into the nearest standard focal length.
+    If the focal length is exactly halfway between two buckets, it rounds down.
+    E.g. 84.9 -> 85, 85.1 -> 85, 85.0 -> 85
 
     Args:
         focal (float): The focal length to bucket.

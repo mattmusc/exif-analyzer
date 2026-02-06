@@ -22,3 +22,13 @@ venv/
 !.vscode/extensions.json
 !.vscode/launch.json
 !.vscode/tasks.json
+
+# Coverage
+.coverage
+.coverage.*
+coverage/
+coverage.*
+.coverage.xml
+.coverage.*.xml
+coverage.xml
+coverage.*.xml

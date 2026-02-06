@@ -2,8 +2,11 @@ import argparse
 import os
 
 
-def parse_args():
+def parse_args(args=None):
     """Creates a parser for command-line arguments.
+
+    Args:
+        args (list[str], optional): Arguments to parse. Defaults to None (sys.argv[1:]).
 
     Returns:
         argparse.Namespace: Parsed arguments.
@@ -95,4 +98,4 @@ def parse_args():
     )
     parser.add_argument("--output", default=None, help="Output file (default: stdout)")
 
-    return parser.parse_args()
+    return parser.parse_args(args)

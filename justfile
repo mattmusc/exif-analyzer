@@ -13,9 +13,10 @@ default:
 # ─────────────────────
 
 setup:
-    python -m venv .venv
+    /usr/bin/env python3 -m venv .venv
     {{ pip }} install --upgrade pip
     {{ pip }} install -e .
+    {{ pip }} install -e ".[dev]"
 
 # ─────────────────────
 # Run
@@ -43,6 +44,20 @@ tools:
     {{ pip }} install black ruff
 
 # ─────────────────────
+# Test
+# ─────────────────────
+
+test:
+    .venv/bin/pytest
+
+cov:
+    .venv/bin/pytest --cov --cov-report=term-missing
+
+cov-html:
+    .venv/bin/pytest --cov --cov-report=html
+    @echo "Open htmlcov/index.html"
+
+# ─────────────────────
 # Clean
 # ─────────────────────
 
@@ -50,3 +65,4 @@ clean:
     rm -rf .venv
     rm -rf **/__pycache__
     rm -rf *.egg-info
+    rm -rf htmlcov
