@@ -1,0 +1,19 @@
+# Python packaging
+*.egg-info/
+.eggs/
+
+# Bytecode
+__pycache__/
+*.py[cod]
+
+# Virtualenv
+.venv/
+env/
+venv/
+
+# Tooling
+.pytest_cache/
+.mypy_cache/
+.vscode/
+.ruff_cache/
+.just_cache/
