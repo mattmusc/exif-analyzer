@@ -14,6 +14,11 @@ venv/
 # Tooling
 .pytest_cache/
 .mypy_cache/
-.vscode/
 .ruff_cache/
 .just_cache/
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
