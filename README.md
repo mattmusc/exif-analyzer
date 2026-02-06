@@ -42,27 +42,106 @@ On macOS:
 brew install exiftool
 ```
 
+## Installation
+
+The project uses `just` as a command runner. To set up the development environment:
+
+```bash
+just setup
+```
+
+This will create a virtual environment (`.venv`), upgrade pip, and install the package in editable mode with development dependencies.
+
+## CLI Usage
+
+You can run the analyzer directly through `just` or by calling the module:
+
+```bash
+# Basic analysis of the current directory
+just analyze
+
+# Analyze a specific directory
+just analyze path/to/photos
+
+# Change top N results and output format
+just analyze-json path/to/photos
+
+# Use raw focal lengths (no bucketing)
+python3 -m exif_analyzer path/to/photos --no-bucket-focals
+
+# Save results to a file
+python3 -m exif_analyzer path/to/photos --format json --output stats.json
+```
+
+### Options:
+- `-n, --top-n`: Number of top results to show (default: 10)
+- `-e, --extensions`: List of extensions to scan
+- `--no-bucket-focals`: Disable intelligent focal length grouping
+- `--format`: `console` (default) or `json`
+- `--output`: Save output to a specific file
+
+---
+
 ## Architecture
 
-```
-exif_analyzer/
-├─ cli.py                 # argument parsing
-├─ runner.py              # orchestration
-├─ metadata_extractor.py  # exiftool + parallel processing
-├─ summaries_builders.py  # statistics computation (pure functions)
-├─ summaries_emitter.py   # output selection
-├─ renderers/
-│  ├─ console.py
-│  └─ json.py
-└─ files_retriever.py
-```
+`exif-analyzer` follows a clean, modular architecture:
+
+- `cli.py`: Command-line argument definition.
+- `runner.py`: Orchestration of the analysis pipeline.
+- `metadata_extractor.py`: Multi-threaded metadata extraction via `exiftool`.
+- `summaries_builders.py`: Logic for computing statistics (pure functions).
+- `summaries_emitter.py`: Strategy for outputting the report.
+- `renderers/`: Implementation of different output formats (Console, JSON).
+- `files_retriever.py`: Recursive file discovery and filtering.
+
+---
 
 ## Library usage
+
+If you want to integrate `exif-analyzer` into your own Python scripts:
 
 ```python
 from exif_analyzer.runner import run
 from exif_analyzer.cli import parse_args
 
-args = parse_args()
-run(args)
+# Create a custom arguments namespace
+args = parse_args(["/path/to/photos", "--top-n", "5"])
+metadata = run(args)
 ```
+
+---
+
+## Development
+
+We keep the project robust with a full test suite and linting tools.
+
+```bash
+# Run all tests
+just test
+
+# Run tests with coverage report
+just cov
+
+# Generate HTML coverage report
+just cov-html
+
+# Formatting and linting
+just tools  # Install tools
+just fmt    # Run black
+just lint   # Run ruff
+```
+
+Current test coverage is **>90%** 🚀
+
+---
+
+## Roadmap
+- [ ] CSV output
+- [ ] SQLite backend
+- [ ] Web dashboard
+
+---
+
+## License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
